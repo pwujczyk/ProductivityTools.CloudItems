@@ -1,4 +1,8 @@
 function InitResources(){
+		[cmdletbinding()]
+	param(
+		[string]$profile
+	)
 	Create-ResourceGroup -Profile $profile -Verbose 
 	Create-StorageAccount -Profile $profile  -Verbose
 	Create-StorageContainer -Profile $profile  -Verbose
@@ -8,23 +12,24 @@ function ZipFile(){
 	[cmdletbinding()]
 	param(
 		[System.IO.FileInfo]$fileInfo,
-		[switch]$compress,
-		[switch]$usePassword
+		[switch]$usePassword,
+		[string]$profile
 	)
 
-	if ($compress)
+	Write-Verbose $fileInfo.FullName
+	$fileName=[System.IO.Path]::Combine($fileInfo.Directory.FullName,$fileInfo.BaseName+".zip")
+
+	if ($usePassword)
 	{
-		Write-Verbose $fileInfo.FullName
-		$fileName=[System.IO.Path]::Combine($fileInfo.Directory.FullName,$fileInfo.BaseName+".zip")
-		Compress-7Zip -Path $fileInfo.FullName -ArchiveFileName $fileName -Verbose
-		return $fileName;
-		#Compress-7Zip -Path $path -Password ryne22s5az25w*63sce -ArchiveFileName  $name  -EncryptFilenames -Verbose
+		$password = Get-MasterConfiguration $("$profile"+":Password")
+		Write-Verbose "Password which will be used to zip files: $password"
+		Compress-7Zip -Path $fileInfo.FullName -Password $password -ArchiveFileName $fileName -Verbose
 	}
 	else
 	{
-		
+		Compress-7Zip -Path $fileInfo.FullName -ArchiveFileName $fileName -Verbose
 	}
-	
+	return $fileName;
 	
 }
 
@@ -34,14 +39,15 @@ function PushItem()
 	param(
 		[System.IO.FileInfo]$fileInfo,
 		[switch]$compress,
-		[switch]$usePassword
+		[switch]$usePassword,
+		[string]$profile
 	)
 
 	$path=$fileInfo.FullName;
 
-	if($compress)
+	if($compress -or $usePassword)
 	{
-		$zipPath=ZipFile -fileInfo $fileInfo -compress:$compress
+		$zipPath=ZipFile -fileInfo $fileInfo -usePassword:$usePassword -profile $profile
 		$path=$zipPath
 	}
 	
@@ -67,7 +73,8 @@ function Push-FileToTheCloud(){
 	$fileInfo=$(Get-ChildItem $Path)[0]
 	 
 	#InitResources $profile
-	$url=PushItem -fileInfo $fileInfo -compress:$Compress
+	
+	$url=PushItem -fileInfo $fileInfo -compress:$Compress -profile $Profile -usePassword:$UsePassword
 	Write-Host $url
 
 }
