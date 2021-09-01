@@ -11,7 +11,7 @@ function InitResources(){
 function ZipFile(){
 	[cmdletbinding()]
 	param(
-		[System.IO.FileInfo]$fileInfo,
+		[System.IO.FileSystemInfo]$fileInfo,
 		[switch]$usePassword,
 		[string]$profile
 	)
@@ -37,7 +37,7 @@ function PushItem()
 {
 	[cmdletbinding()]
 	param(
-		[System.IO.FileInfo]$fileInfo,
+		[System.IO.FileSystemInfo]$fileInfo,
 		[switch]$compress,
 		[switch]$usePassword,
 		[string]$profile
@@ -52,16 +52,19 @@ function PushItem()
 	}
 	
 	$blob=Push-FileToAzureBlobStorage -Profile $profile -Path "$path"
+	Write-Verbose "Item was pushed to the cloud"
+
+	if($compress -or $usePassword)
+	{
+		Write-Verbose "Zip file will be removed now"
+		Remove-Item -path $zipPath
+	}
+
 	$url=$blob.BlobClient.Uri.AbsoluteUri
 	return $url
 }
 
-function PushFolderToTheCloud()
-{
-
-}
-
-function Push-FileToTheCloud(){
+function Push-ItemToTheCloud(){
 	[cmdletbinding()]
 	param(
 		[string]$Profile,
@@ -70,14 +73,21 @@ function Push-FileToTheCloud(){
 		[switch]$UsePassword
 	)
 	
-	$fileInfo=$(Get-ChildItem $Path)[0]
+	$fileInfo=Get-Item $Path
 	 
 	#InitResources $profile
 	
 	$url=PushItem -fileInfo $fileInfo -compress:$Compress -profile $Profile -usePassword:$UsePassword
 	Write-Host $url
-
 }
 
-Export-ModuleMember Push-FileToTheCloud
+function Get-FileListFromTheCloud()
+{
+		[cmdletbinding()]
+	param(
+		[string]$Profile
+	)
+}
+
+Export-ModuleMember Push-ItemToTheCloud
 

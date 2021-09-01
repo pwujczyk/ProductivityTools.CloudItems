@@ -28,8 +28,8 @@
   </PropertyGroup>
   <ItemGroup />
   <ItemGroup>
-    <Compile Include="ProductivityTools.CloudBlobs.psd1" />
-    <Compile Include="ProductivityTools.CloudBlobs.psm1" />
+    <Compile Include="ProductivityTools.CloudItems.psd1" />
+    <Compile Include="ProductivityTools.CloudItems.psm1" />
     <Compile Include="Runner.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
