@@ -116,8 +116,6 @@ function Remove-AllItemsFromTheCloud()
 	}
 }
 
-
-
 Export-ModuleMember Push-ItemToTheCloud
 Export-ModuleMember Get-ItemListFromTheCloud
 Export-ModuleMember Remove-ItemFromTheCloud
