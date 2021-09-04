@@ -26,11 +26,11 @@ To use it in the master configuration file add:
   
 "AzureCloudFoldersTest":{
     "Location":"westeurope",
-	"ResourceGroup":"cloudfolder1",
-	"StorageName":"cloudfolder1",
-	"SkuName":"Standard_RAGRS",
-	"StorageContainerName":"files",
-	"Password":"Test123"
+    "ResourceGroup":"cloudfolder1",
+    "StorageName":"cloudfolder1",
+    "SkuName":"Standard_RAGRS",
+    "StorageContainerName":"files",
+    "Password":"Test123"
 },
 ```
 From this moment you coud use 
@@ -43,18 +43,18 @@ Push-ItemToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\Directory" -Compr
 Push-ItemToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\Directory" -Compress -UsePassword 
 ```
 
-![Example](Images\PushItemsExample.png)
+![Example](Images/PushItemsExample.png)
 
 Commans will result in:
 
-![Example](Images\ExampleResult.png)
+![Example](Images/ExampleResult.png)
 
 To see all files on the storage you can use
 
-```
+```powershell
 Get-ItemListFromTheCloud -Profile AzureCloudFoldersTest
 ```
-![Example](Images\List.png)
+![Example](Images/List.png)
 
 When files are not needed you can remove it one by one or all at once.
 
