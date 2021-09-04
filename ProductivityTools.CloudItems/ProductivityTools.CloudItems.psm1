@@ -81,13 +81,45 @@ function Push-ItemToTheCloud(){
 	Write-Host $url
 }
 
-function Get-FileListFromTheCloud()
+function Get-ItemListFromTheCloud()
 {
-		[cmdletbinding()]
+	[cmdletbinding()]
 	param(
 		[string]$Profile
 	)
+	Get-AzureBlobStorageFiles -Profile "$Profile"
 }
 
+function Remove-ItemFromTheCloud()
+{
+	[cmdletbinding()]
+	param(
+		[string]$Profile,
+		[string]$Name
+	)
+	Remove-AzureBlobStorageFile -Profile $Profile -Name $Name
+}
+
+function Remove-AllItemsFromTheCloud()
+{
+	[cmdletbinding()]
+	param(
+		[string]$Profile
+	)
+	$files=Get-AzureBlobStorageFiles -Profile "$Profile"
+	foreach($file in $files)
+	{
+		$name=Split-Path $file -leaf
+		Write-Output $name
+
+		Remove-AzureBlobStorageFile -Profile $Profile -Name  $name -Force
+	}
+}
+
+
+
 Export-ModuleMember Push-ItemToTheCloud
+Export-ModuleMember Get-ItemListFromTheCloud
+Export-ModuleMember Remove-ItemFromTheCloud
+Export-ModuleMember Remove-AllItemsFromTheCloud
 
