@@ -36,10 +36,30 @@ To use it in the master configuration file add:
 From this moment you coud use 
 
 ```powershell
-Push-FileToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\xxx.jpg" 
-Push-FileToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\xxx.jpg" -Compress
+Push-ItemToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\xxx.jpg" 
+Push-ItemToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\xxx.jpg" -Compress
 Push-ItemToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\xxx.jpg" -Compress -UsePassword 
 Push-ItemToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\Directory" -Compress 
 Push-ItemToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\Directory" -Compress -UsePassword 
 ```
 
+![Example](Images\PushItemsExample.png)
+
+Commans will result in:
+
+![Example](Images\ExampleResult.png)
+
+To see all files on the storage you can use
+
+```
+Get-ItemListFromTheCloud -Profile AzureCloudFoldersTest
+```
+![Example](Images\List.png)
+
+When files are not needed you can remove it one by one or all at once.
+
+```powershell
+Remove-ItemFromTheCloud Directory.zip -Profile AzureCloudFoldersTest
+Remove-AllItemsFromTheCloud -Profile AzureCloudFoldersTest
+
+```

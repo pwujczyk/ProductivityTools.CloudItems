@@ -1,11 +1,11 @@
 function InitResources(){
 		[cmdletbinding()]
 	param(
-		[string]$profile
+		[string]$profile,
 	)
-	Create-ResourceGroup -Profile $profile -Verbose 
-	Create-StorageAccount -Profile $profile  -Verbose
-	Create-StorageContainer -Profile $profile  -Verbose
+	Create-ResourceGroup -Profile $profile  
+	Create-StorageAccount -Profile $profile  
+	Create-StorageContainer -Profile $profile  
 }
 
 function ZipFile(){
@@ -23,11 +23,11 @@ function ZipFile(){
 	{
 		$password = Get-MasterConfiguration $("$profile"+":Password")
 		Write-Verbose "Password which will be used to zip files: $password"
-		Compress-7Zip -Path $fileInfo.FullName -Password $password -ArchiveFileName $fileName -Verbose
+		Compress-7Zip -Path $fileInfo.FullName -Password $password -ArchiveFileName $fileName 
 	}
 	else
 	{
-		Compress-7Zip -Path $fileInfo.FullName -ArchiveFileName $fileName -Verbose
+		Compress-7Zip -Path $fileInfo.FullName -ArchiveFileName $fileName 
 	}
 	return $fileName;
 	
