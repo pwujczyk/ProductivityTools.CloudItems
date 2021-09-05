@@ -11,7 +11,7 @@
 </p>
 
 
-# Cloud blobs
+# Cloud Items
 
 Module helps to push files and directories to the azure blob storage.
 <!--more-->
@@ -30,7 +30,8 @@ To use it in the master configuration file add:
     "StorageName":"cloudfolder1",
     "SkuName":"Standard_RAGRS",
     "StorageContainerName":"files",
-    "Password":"Test123"
+    "Password":"Test123",
+    "CdnHostname":"empty"
 },
 ```
 From this moment you coud use 

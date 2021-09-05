@@ -1,7 +1,7 @@
 function InitResources(){
 		[cmdletbinding()]
 	param(
-		[string]$profile,
+		[string]$profile
 	)
 	Create-ResourceGroup -Profile $profile  
 	Create-StorageAccount -Profile $profile  
@@ -64,6 +64,21 @@ function PushItem()
 	return $url
 }
 
+function GetProfile(){
+	[cmdletbinding()]
+	param(
+		[string]$Profile
+	)
+
+	Write-Verbose "Passed profile $Profile"
+
+	if ($Profile -eq $null -or $Profile -eq "")
+	{
+		$Profile="ProductivityTools.CloudItems.Default"
+	}
+	return $Profile
+}
+
 function Push-ItemToTheCloud(){
 	[cmdletbinding()]
 	param(
@@ -72,7 +87,7 @@ function Push-ItemToTheCloud(){
 		[switch]$Compress,
 		[switch]$UsePassword
 	)
-	
+	$Profile=GetProfile -Profile $Profile
 	$fileInfo=Get-Item $Path
 	 
 	#InitResources $profile
@@ -87,6 +102,8 @@ function Get-ItemListFromTheCloud()
 	param(
 		[string]$Profile
 	)
+
+	$Profile=GetProfile -Profile $Profile
 	Get-AzureBlobStorageFiles -Profile "$Profile"
 }
 
@@ -97,6 +114,7 @@ function Remove-ItemFromTheCloud()
 		[string]$Profile,
 		[string]$Name
 	)
+	$Profile=GetProfile -Profile $Profile
 	Remove-AzureBlobStorageFile -Profile $Profile -Name $Name
 }
 
@@ -106,6 +124,7 @@ function Remove-AllItemsFromTheCloud()
 	param(
 		[string]$Profile
 	)
+	$Profile=GetProfile -Profile $Profile
 	$files=Get-AzureBlobStorageFiles -Profile "$Profile"
 	foreach($file in $files)
 	{
