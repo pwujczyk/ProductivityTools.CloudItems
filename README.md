@@ -34,6 +34,9 @@ To use it in the master configuration file add:
     "CdnHostname":"empty"
 },
 ```
+
+CdnHostname is not required, but module is based on the AzureAutomation which requires this value.
+
 From this moment you coud use 
 
 ```powershell
@@ -44,6 +47,15 @@ Push-ItemToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\Directory" -Compr
 Push-ItemToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\Directory" -Compress -UsePassword 
 ```
 
+If you won't provide Profile value default ProductivityTools.CloudItems.Default will be used. So if in the configuration you will name your variables ProductivityTools.CloudItems.Default you can use:
+
+```powershell
+Push-ItemToTheCloud -Path "d:\xxx.jpg" 
+Push-ItemToTheCloud -Path "d:\xxx.jpg" -Compress
+Push-ItemToTheCloud -Path "d:\xxx.jpg" -Compress -UsePassword 
+Push-ItemToTheCloud -Path "d:\Directory" -Compress 
+Push-ItemToTheCloud -Path "d:\Directory" -Compress -UsePassword 
+```
 ![Example](Images/PushItemsExample.png)
 
 Commans will result in:

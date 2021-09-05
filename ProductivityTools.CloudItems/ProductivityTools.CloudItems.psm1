@@ -88,9 +88,10 @@ function Push-ItemToTheCloud(){
 		[switch]$UsePassword
 	)
 	$Profile=GetProfile -Profile $Profile
+
 	$fileInfo=Get-Item $Path
 	 
-	#InitResources $profile
+	InitResources $profile
 	
 	$url=PushItem -fileInfo $fileInfo -compress:$Compress -profile $Profile -usePassword:$UsePassword
 	Write-Host $url
