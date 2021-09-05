@@ -47,7 +47,7 @@ Push-ItemToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\Directory" -Compr
 Push-ItemToTheCloud -Profile "AzureCloudFoldersTest" -Path "d:\Directory" -Compress -UsePassword 
 ```
 
-If you won't provide Profile value default ProductivityTools.CloudItems.Default will be used. So if in the configuration you will name your variables ProductivityTools.CloudItems.Default you can use:
+If you will not provide Profile value default ProductivityTools.CloudItems.Default will be used. So if in the configuration you will name your variables ProductivityTools.CloudItems.Default you can use:
 
 ```powershell
 Push-ItemToTheCloud -Path "d:\xxx.jpg" 
@@ -56,6 +56,7 @@ Push-ItemToTheCloud -Path "d:\xxx.jpg" -Compress -UsePassword
 Push-ItemToTheCloud -Path "d:\Directory" -Compress 
 Push-ItemToTheCloud -Path "d:\Directory" -Compress -UsePassword 
 ```
+<!--og-image-->
 ![Example](Images/PushItemsExample.png)
 
 Commans will result in:
