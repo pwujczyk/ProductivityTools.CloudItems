@@ -56,11 +56,11 @@ Push-ItemToTheCloud -Path "d:\xxx.jpg" -Compress -UsePassword
 Push-ItemToTheCloud -Path "d:\Directory" -Compress 
 Push-ItemToTheCloud -Path "d:\Directory" -Compress -UsePassword 
 ```
-<!--og-image-->
 ![Example](Images/PushItemsExample.png)
 
 Commans will result in:
 
+<!--og-image-->
 ![Example](Images/ExampleResult.png)
 
 To see all files on the storage you can use
