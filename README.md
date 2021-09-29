@@ -19,6 +19,7 @@ Module helps to push files and directories to the azure blob storage.
 **To use it AZ module needs to be isntalled, AZ module cannot be added as dependency as AZ is not allowed name and manifest doesn't pass validation**
 ```
 Install-Module AZ
+Connect-AzAccount
 ```
 
 I often have a need to send file to someone. I decided to use Azure as exchange platform. Tool of course need to again be convienient to use.
