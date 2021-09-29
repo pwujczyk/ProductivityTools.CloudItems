@@ -16,6 +16,11 @@
 Module helps to push files and directories to the azure blob storage.
 <!--more-->
 
+**To use it AZ module needs to be isntalled, AZ module cannot be added as dependency as AZ is not allowed name and manifest doesn't pass validation**
+```
+Install-Module AZ
+```
+
 I often have a need to send file to someone. I decided to use Azure as exchange platform. Tool of course need to again be convienient to use.
 
 Module is based on the [Master Configuration](https://github.com/pwujczyk/ProductivityTools.MasterConfiguration.Cmdlet) which should contain configuration for the azure blob storage.
