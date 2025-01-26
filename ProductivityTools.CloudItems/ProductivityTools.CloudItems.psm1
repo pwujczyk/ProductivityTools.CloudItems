@@ -127,13 +127,13 @@ function Remove-AllItemsFromTheCloud()
 		[string]$Profile
 	)
 	$Profile=GetProfile -Profile $Profile
-	$files=Get-AzureBlobStorageFilesNames -Profile "$Profile"
-	foreach($file in $files)
+	$filesNames=Get-AzureBlobStorageFilesNames -Profile "$Profile"
+	foreach($fileName in $filesNames)
 	{
-		$name=Split-Path $file -leaf
-		Write-Output $name
 
-		$r=Remove-AzureBlobStorageFile -Profile $Profile -Name  $name -Force
+		Write-Output $fileName
+
+		$r=Remove-AzureBlobStorageFile -Profile $Profile -Name  $fileName -Force
 		Write-Host $r;
 	}
 }

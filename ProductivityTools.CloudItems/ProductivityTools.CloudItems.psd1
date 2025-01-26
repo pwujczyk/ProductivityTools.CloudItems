@@ -12,7 +12,7 @@
 RootModule = 'ProductivityTools.CloudItems.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.9'
+ModuleVersion = '0.0.10'
 
 # ID used to uniquely identify this module
 GUID = '746aeef5-409d-47e0-95a4-3a44f1d6c0cf'
